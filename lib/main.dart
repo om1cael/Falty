@@ -1,3 +1,4 @@
+import 'package:falty/pages/home_page.dart';
 import 'package:falty/pages/setup_page.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,5 @@
 import 'package:falty/controllers/setup_page_controller.dart';
+import 'package:falty/pages/home_page.dart';
 import 'package:falty/widgets/number_input_field.dart';
 import 'package:flutter/material.dart';
 
@@ -74,8 +75,12 @@ class _SetupPageState extends State<SetupPage> {
                       onPressed: () async {
                         if(setupPageController.validate()) {
                           bool successSave = await setupPageController.save();
+                          if(!mounted) return;
+
                           if(successSave) {
-                            // go to next screen
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => HomePage()),
+                            );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Eita, não deu pra salvar. Quer tentar de novo?'))
