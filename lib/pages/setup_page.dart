@@ -71,9 +71,16 @@ class _SetupPageState extends State<SetupPage> {
                   spacing: 10,
                   children: [
                     ElevatedButton.icon(
-                      onPressed: () {
+                      onPressed: () async {
                         if(setupPageController.validate()) {
-                          print('then we save');
+                          bool successSave = await setupPageController.save();
+                          if(successSave) {
+                            // go to next screen
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Eita, não deu pra salvar. Quer tentar de novo?'))
+                            );
+                          }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Preencha os campos corretamente.'))
