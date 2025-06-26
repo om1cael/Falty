@@ -68,7 +68,15 @@ class _SetupPageState extends State<SetupPage> {
                 ),
                 SizedBox(height: 32,),
                 ElevatedButton.icon(
-                  onPressed: () {}, 
+                  onPressed: () {
+                    if(setupPageController.validate()) {
+                      print('then we save');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Preencha os campos corretamente.'))
+                      );
+                    }
+                  }, 
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(150, 50)
                   ),
