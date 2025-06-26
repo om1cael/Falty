@@ -2,9 +2,14 @@ import 'package:falty/controllers/setup_page_controller.dart';
 import 'package:falty/widgets/number_input_field.dart';
 import 'package:flutter/material.dart';
 
-class SetupPage extends StatelessWidget {
-  SetupPage({super.key});
+class SetupPage extends StatefulWidget {
+  const SetupPage({super.key});
 
+  @override
+  State<SetupPage> createState() => _SetupPageState();
+}
+
+class _SetupPageState extends State<SetupPage> {
   final SetupPageController setupPageController = SetupPageController();
 
   @override
