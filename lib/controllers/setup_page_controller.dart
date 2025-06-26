@@ -14,6 +14,10 @@ class SetupPageController {
     return true;
   }
 
+  bool save() {
+    return false;
+  }
+
   void dispose() {
     daysController.dispose();
     limitController.dispose();

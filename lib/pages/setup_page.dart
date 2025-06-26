@@ -50,7 +50,7 @@ class _SetupPageState extends State<SetupPage> {
                 ),
                 SizedBox(height: 24,),
                 NumberInputField(
-                  label: 'Dias de aula',
+                  label: 'Dias letivos',
                   hint: '200',
                   helper: 'No Brasil, o mínimo é de 200 dias',
                   suffix: 'dias',
@@ -59,7 +59,7 @@ class _SetupPageState extends State<SetupPage> {
                 ),
                 SizedBox(height: 24,),
                 NumberInputField(
-                  label: 'Limite',
+                  label: 'Limite de faltas',
                   hint: '25',
                   helper: 'No Brasil, o limite é de 25%',
                   suffix: '%',
@@ -67,27 +67,41 @@ class _SetupPageState extends State<SetupPage> {
                   controller: setupPageController.limitController,
                 ),
                 SizedBox(height: 32,),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    if(setupPageController.validate()) {
-                      print('then we save');
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Preencha os campos corretamente.'))
-                      );
-                    }
-                  }, 
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: Size(150, 50)
-                  ),
-                  label: Text(
-                    'Tô pronto!',
-                    style: TextStyle(
-                      color: Color(0xff9381FF)
+                Column(
+                  spacing: 10,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        if(setupPageController.validate()) {
+                          print('then we save');
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Preencha os campos corretamente.'))
+                          );
+                        }
+                      }, 
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size(150, 50)
+                      ),
+                      label: Text(
+                        'Tô pronto!',
+                        style: TextStyle(
+                          color: Color(0xff9381FF)
+                        ),
+                      ),
+                      icon: Icon(Icons.arrow_forward),
                     ),
-                  ),
-                  icon: Icon(Icons.arrow_forward),
-                )
+                    Text(
+                      'Pode relaxar, seus dados ficam guardados só no seu aparelho.',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
