@@ -13,6 +13,12 @@ class _SetupPageState extends State<SetupPage> {
   final SetupPageController setupPageController = SetupPageController();
 
   @override
+  void dispose() {
+    setupPageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff9D71E8),
