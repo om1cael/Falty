@@ -7,6 +7,7 @@ class NumberInputField extends StatelessWidget {
   final String suffix;
   final String helper;
   final int length;
+  final TextEditingController controller;
 
   const NumberInputField({
     super.key,
@@ -15,6 +16,7 @@ class NumberInputField extends StatelessWidget {
     required this.suffix,
     required this.helper,
     required this.length,
+    required this.controller,
   });
 
   @override
@@ -30,6 +32,7 @@ class NumberInputField extends StatelessWidget {
           ),
         ),
         TextField(
+          controller: controller,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           maxLength: length,

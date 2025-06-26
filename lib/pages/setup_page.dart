@@ -1,8 +1,11 @@
+import 'package:falty/controllers/setup_page_controller.dart';
 import 'package:falty/widgets/number_input_field.dart';
 import 'package:flutter/material.dart';
 
 class SetupPage extends StatelessWidget {
-  const SetupPage({super.key});
+  SetupPage({super.key});
+
+  final SetupPageController setupPageController = SetupPageController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +44,7 @@ class SetupPage extends StatelessWidget {
                   helper: 'No Brasil, o mínimo é de 200 dias',
                   suffix: 'dias',
                   length: 3,
+                  controller: setupPageController.daysController,
                 ),
                 SizedBox(height: 24,),
                 NumberInputField(
@@ -49,6 +53,7 @@ class SetupPage extends StatelessWidget {
                   helper: 'No Brasil, o limite é de 25%',
                   suffix: '%',
                   length: 2,
+                  controller: setupPageController.limitController,
                 ),
                 SizedBox(height: 32,),
                 ElevatedButton.icon(
