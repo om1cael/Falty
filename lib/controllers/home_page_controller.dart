@@ -7,6 +7,10 @@ class HomePageController {
     return await storageService.saveAbsence();
   }
 
+  Future<bool> removeAbsence() async {
+    return await storageService.removeAbsence();
+  }
+
   Future<int?> getMaxAbsences() async {
     return await storageService.getMaxAbsences();
   }

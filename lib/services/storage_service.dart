@@ -8,6 +8,7 @@ class StorageService {
     double maxAbsences = percentageLimit * days;
     
     await asyncPrefs.setInt('max_absences', maxAbsences.toInt());
+    await asyncPrefs.setInt('absences', 0);
     return true;
   }
 
@@ -16,6 +17,14 @@ class StorageService {
     if(absences == null) return false;
 
     await asyncPrefs.setInt('absences', absences + 1);
+    return true;
+  }
+
+  Future<bool> removeAbsence() async {
+    int? absences = await getAbsences();
+    if(absences == null || absences == 0) return false;
+
+    await asyncPrefs.setInt('absences', absences - 1);
     return true;
   }
 

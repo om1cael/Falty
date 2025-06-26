@@ -15,11 +15,31 @@ class _HomePageState extends State<HomePage> {
   double absencePercentageUsed = 0;
 
   final HomePageController homePageController = HomePageController();
+  final DateTime now = DateTime.now();
+
+  final months = {
+    1: 'janeiro',
+    2: 'fevereiro',
+    3: 'março',
+    4: 'abril',
+    5: 'maio',
+    6: 'junho',
+    7: 'julho',
+    8: 'agosto',
+    9: 'setembro',
+    10: 'outubro',
+    11: 'novembro',
+    12: 'dezembro'
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    updateValues();
+  }
 
   @override
   Widget build(BuildContext context) {
-    updateValues();
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff9D71E8),
@@ -91,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Text(
-                      'Hoje são 26 de junho.',
+                      'Hoje são ${now.day} de ${months[now.month]}.',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w200,
@@ -142,14 +162,14 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadiusGeometry.circular(12),
                               child: LinearProgressIndicator(
                                 backgroundColor: Colors.white,
-                                value: 0.1,
+                                value: absencePercentageUsed.clamp(0, 1),
                                 minHeight: 6,
                                 color: Color(0xffFF5C5C),
                               ),
                             ),
                             SizedBox(height: 5,),
                             Text(
-                              'Você usou $absencePercentageUsed% do seu limite',
+                              'Você usou ${(absencePercentageUsed * 100).round()}% do seu limite',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w300,
@@ -164,14 +184,30 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 20,),
                 ElevatedButton.icon(
-                  onPressed: () => updateValues(),
+                    onPressed: () async {
+                      await homePageController.saveAbsence();
+                      updateValues();
+                    },
+                    label: Text(
+                      'Registrar falta de hoje',
+                      style: TextStyle(
+                        color: Color(0xff9381FF)
+                      ),
+                    ),
+                    icon: Icon(Icons.add),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    await homePageController.removeAbsence();
+                    updateValues();
+                  },
                   label: Text(
-                    'Registrar falta de hoje',
+                    'Remover falta de hoje',
                     style: TextStyle(
                       color: Color(0xff9381FF)
                     ),
                   ),
-                  icon: Icon(Icons.add),
+                  icon: Icon(Icons.remove),
                 ),
               ],
             ),
