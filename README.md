@@ -64,5 +64,4 @@ Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
 ## 🙋‍♂️ Autor
 
-Feito com 💜 por \[Seu Nome ou Nickname]
-GitHub: [@seu-usuario](https://github.com/seu-usuario)
+Feito com 💜 por mim, Micael :)
