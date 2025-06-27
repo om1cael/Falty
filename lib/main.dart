@@ -12,13 +12,36 @@ class MyApp extends StatelessWidget {
 
   final StorageService storageService = StorageService();
 
+  Future<bool> isSetupDone() async {
+    return await storageService.getSetupDone() ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      home: SetupPage(),
+      home: FutureBuilder(
+        future: isSetupDone(), 
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return Scaffold(
+              backgroundColor: Color(0xff9D71E8),
+              body: Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+            );
+          }
+          else if(!snapshot.hasData) {
+            return SetupPage();
+          } else {
+            return HomePage();
+          }
+        } 
+      ),
     );
   }
 }

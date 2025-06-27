@@ -7,6 +7,7 @@ class StorageService {
     double percentageLimit = limit / 100;
     double maxAbsences = percentageLimit * days;
     
+    await asyncPrefs.setBool('setup_done', true);
     await asyncPrefs.setInt('max_absences', maxAbsences.toInt());
     await asyncPrefs.setInt('absences', 0);
     return true;
@@ -34,5 +35,9 @@ class StorageService {
 
   Future<int?> getMaxAbsences() async {
     return await asyncPrefs.getInt('max_absences');
+  }
+
+  Future<bool?> getSetupDone() async {
+    return await asyncPrefs.getBool('setup_done');
   }
 }

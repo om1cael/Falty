@@ -14,6 +14,8 @@ class _HomePageState extends State<HomePage> {
   int remainingAbsences = 0;
   double absencePercentageUsed = 0;
 
+  bool isLoading = true;
+
   final HomePageController homePageController = HomePageController();
   final DateTime now = DateTime.now();
 
@@ -93,131 +95,146 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       backgroundColor: Color(0xff9D71E8),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Column(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Column(
                   children: [
-                    Text(
-                      'Opa, tudo tranquilo?',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 56
-                      ),
-                    ),
-                    Text(
-                      'Hoje são ${now.day} de ${months[now.month]}.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w200,
-                        fontSize: 20
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20,),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 107, 66, 177),
-                    borderRadius: BorderRadius.circular(16)
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Você pode faltar até $maxAllowedAbsences dias.',
+                          'Opa, tudo tranquilo?',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
+                            fontSize: 56
+                          ),
+                        ),
+                        Text(
+                          'Hoje são ${now.day} de ${months[now.month]}.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w200,
                             fontSize: 20
                           ),
                         ),
-                        Text(
-                          'Já faltou: $totalAbsences',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300,
-                            fontSize: 14
-                          ),
-                        ),
-                        Text(
-                          'Restam: $remainingAbsences',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300,
-                            fontSize: 14
-                          ),
-                        ),
-                        SizedBox(height: 20,),
-                        Column(
+                      ],
+                    ),
+                    SizedBox(height: 20,),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 107, 66, 177),
+                        borderRadius: BorderRadius.circular(16)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadiusGeometry.circular(12),
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.white,
-                                value: absencePercentageUsed.clamp(0, 1),
-                                minHeight: 6,
-                                color: Color(0xffFF5C5C),
+                            Text(
+                              'Você pode faltar até $maxAllowedAbsences dias.',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
                               ),
                             ),
-                            SizedBox(height: 5,),
                             Text(
-                              'Você usou ${(absencePercentageUsed * 100).round()}% do seu limite',
+                              'Já faltou: $totalAbsences',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w300,
                                 fontSize: 14
                               ),
                             ),
+                            Text(
+                              'Restam: $remainingAbsences',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 14
+                              ),
+                            ),
+                            SizedBox(height: 20,),
+                            Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadiusGeometry.circular(12),
+                                  child: LinearProgressIndicator(
+                                    backgroundColor: Colors.white,
+                                    value: absencePercentageUsed.clamp(0, 1),
+                                    minHeight: 6,
+                                    color: Color(0xffFF5C5C),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                Text(
+                                  'Você usou ${(absencePercentageUsed * 100).round()}% do seu limite',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 14
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20,),
-                ElevatedButton.icon(
-                    onPressed: () async {
-                      await homePageController.saveAbsence();
-                      updateValues();
-                    },
-                    label: Text(
-                      'Registrar falta de hoje',
-                      style: TextStyle(
-                        color: Color(0xff9381FF)
+                        ),
                       ),
                     ),
-                    icon: Icon(Icons.add),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () async {
-                    await homePageController.removeAbsence();
-                    updateValues();
-                  },
-                  label: Text(
-                    'Remover falta de hoje',
-                    style: TextStyle(
-                      color: Color(0xff9381FF)
+                    SizedBox(height: 20,),
+                    ElevatedButton.icon(
+                        onPressed: () async {
+                          await homePageController.saveAbsence();
+                          updateValues();
+                        },
+                        label: Text(
+                          'Registrar falta de hoje',
+                          style: TextStyle(
+                            color: Color(0xff9381FF)
+                          ),
+                        ),
+                        icon: Icon(Icons.add),
                     ),
-                  ),
-                  icon: Icon(Icons.remove),
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        await homePageController.removeAbsence();
+                        updateValues();
+                      },
+                      label: Text(
+                        'Remover falta de hoje',
+                        style: TextStyle(
+                          color: Color(0xff9381FF)
+                        ),
+                      ),
+                      icon: Icon(Icons.remove),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+
+          if(isLoading) (
+            Container(
+              color: Color(0xff9D71E8),
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+            )
+          )
+        ],
+      )
     );
   }
 
-  void updateValues() async {
+  Future<void> updateValues() async {
     int max = await homePageController.getMaxAbsences() ?? 0;
     int total = await homePageController.getAbsences() ?? 0;
 
@@ -226,6 +243,7 @@ class _HomePageState extends State<HomePage> {
       totalAbsences = total;
       remainingAbsences = maxAllowedAbsences - totalAbsences;
       absencePercentageUsed = max == 0 ? 0 : totalAbsences / maxAllowedAbsences;
+      isLoading = false;
     });
   }
 }
