@@ -1,16 +1,68 @@
-# falty
+# 📘 Falty
 
-A new Flutter project.
+**Falty** é um aplicativo feito em Flutter para ajudar estudantes a controlar suas faltas ao longo do ano letivo.
 
-## Getting Started
+Ele calcula o total de faltas permitidas, exibe o número de faltas já registradas, o restante disponível e mostra um gráfico de progresso simples.
 
-This project is a starting point for a Flutter application.
+## ✨ Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+- Registro de faltas
+- Visualização de:
+  - Total de faltas permitidas
+  - Faltas registradas
+  - Faltas restantes
+- Barra de progresso mostrando o percentual de faltas
+- Remoção de faltas
+- Setup inicial com cálculo baseado nos dias letivos e porcentagem limite
+- Armazenamento local com SharedPreferences
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 Tecnologias utilizadas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Dart
+- SharedPreferences (`shared_preferences`)
+- Material Design
+
+## 📦 Instalação e uso local
+
+Certifique-se de ter o Flutter instalado.  
+Guia oficial: [flutter.dev/get-started](https://flutter.dev/get-started)
+
+```bash
+# Clone o repositório
+git clone https://github.com/om1cael/Falty.git
+cd Falty
+
+# Instale as dependências
+flutter pub get
+
+# Rode o app em um dispositivo/emulador
+flutter run
+````
+
+## 📱 Screenshots
+
+<img src="https://github.com/user-attachments/assets/09af9239-af7b-42a6-94be-fc28575dc4c6" width=300>
+<img src="https://github.com/user-attachments/assets/c28d9638-e6d9-49c6-9392-3f0a124337ff" width=300>
+
+## 💡 Melhorias futuras
+
+* Controle de faltas por matéria
+* Histórico mensal de faltas
+* Gráfico estilo GitHub Contributions
+* Notificações ao se aproximar do limite
+* Tela de estatísticas detalhadas
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas!
+Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+
+## 🙋‍♂️ Autor
+
+Feito com 💜 por \[Seu Nome ou Nickname]
+GitHub: [@seu-usuario](https://github.com/seu-usuario)
