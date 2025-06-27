@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
               ),
             );
           }
-          else if(!snapshot.hasData) {
+          else if(snapshot.data == false) {
             return SetupPage();
           } else {
             return HomePage();
